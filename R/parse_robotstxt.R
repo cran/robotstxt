@@ -1,15 +1,50 @@
+#' get_robotstxt() cache
+rt_cache <- new.env(parent=emptyenv())
+
 #' downloading robots.txt file
 #' @param domain domain from which to download robots.txt file
+#' @param warn warn about being unable to download domain/robots.txt because of
+#'   HTTP resposne status 404. If this happens,
 #' @export
-get_robotstxt <- function(domain){
-  rtxt <- httr::GET(paste0(domain, "/robots.txt"))
-  if( rtxt$status == 200 ){
-    rtxt <- httr::content(rtxt)
-    class(rtxt) <- c("robotstxt_text", "character")
-  }else{
-    warning("robotstxt: could not get robots txt from domain")
-    rtxt <- ""
+get_robotstxt <- function(domain, warn=TRUE){
+  # pre checking input
+  if( is.na(domain) ){
+    return(NA)
   }
+  # get data from cache or do download
+  if( is.null(rt_cache[[domain]]) ){
+    request <- httr::GET(paste0(domain, "/robots.txt"))
+  }else{
+    request <- rt_cache[[domain]]
+  }
+  # ok
+  if( request$status < 400 ){
+    rtxt <- httr::content(request,  encoding="UTF-8", as="text")
+    rt_cache[[domain]] <- request
+  }
+  # not found
+  if( request$status == 404 ){
+    if(warn){
+      warning(paste0(
+        "get_robotstxt(): could not get robots.txt from domain: ",
+        domain,
+        " HTTP status: 404"
+      ))
+    }
+    rtxt <- ""
+    rt_cache[[domain]] <- request
+  }
+  # not ok
+  if( !(request$status == 404 | request$status < 400) ){
+    stop(paste0(
+      "get_robotstxt(): could not get robots.txt from domain: ",
+      domain,
+      "; HTTP status: ",
+      request$status
+    ))
+  }
+  # return
+  class(rtxt) <- c("robotstxt_text", "character")
   return(rtxt)
 }
 

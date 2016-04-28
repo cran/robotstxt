@@ -1,12 +1,17 @@
 ## ---- message=FALSE------------------------------------------------------
 library(robotstxt)
+paths_allowed("http://google.com/")
+paths_allowed("http://google.com/search")
+
+## ---- message=FALSE------------------------------------------------------
+library(robotstxt)
 library(dplyr)
 
 ## ---- include=FALSE------------------------------------------------------
-rtxt <- robotstxt$new(domain="wikipedia.org", text=robotstxt:::rt_get_rtxt("robots_wikipedia.txt"))
+rtxt <- robotstxt(domain="wikipedia.org", text=robotstxt:::rt_get_rtxt("robots_wikipedia.txt"))
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  rtxt <- robotstxt$new(domain="wikipedia.org")
+#  rtxt <- robotstxt(domain="wikipedia.org")
 
 ## ------------------------------------------------------------------------
 class(rtxt)
@@ -21,13 +26,19 @@ rtxt$check(paths = c("/","api/"), bot = "Orthogaffe")
 rtxt$check(paths = c("/","api/"), bot = "Mediapartners-Google*  ")
 
 ## ---- include=FALSE------------------------------------------------------
-rtxt <- robotstxt:::rt_get_rtxt("robots_wikipedia.txt")
+r_text <- robotstxt:::rt_get_rtxt("robots_new_york_times.txt")
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  rtxt        <- get_robotstxt("wikipedia.org")
+#  r_text        <- get_robotstxt("nytimes.com")
 
 ## ------------------------------------------------------------------------
-parsed_rtxt <- parse_robotstxt(rtxt)
-permissions <- parsed_rtxt$permissions
-paths_allowed(permissions, paths=c("/","images/"), bot="*")
+r_parsed <- parse_robotstxt(r_text)
+r_parsed
+
+## ------------------------------------------------------------------------
+paths_allowed(
+  paths  = c("images/","/search"), 
+  domain = c("wikipedia.org", "google.com"),
+  bot    = "Orthogaffe"
+)
 
