@@ -4,7 +4,7 @@
 \alias{robotstxt}
 \title{Generate a representations of a robots.txt file}
 \usage{
-robotstxt(domain = NULL, text = NULL)
+robotstxt(domain = NULL, text = NULL, user_agent = NULL)
 }
 \arguments{
 \item{domain}{Domain for which to genarate a representation. If text equals to NULL,
@@ -12,6 +12,9 @@ the function will download the file from server - the default.}
 
 \item{text}{If automatic download of the robots.txt is not prefered, the text can be
 supplied directly.}
+
+\item{user_agent}{HTTP user-agent string to be used to retireve robots.txt file
+from domain}
 }
 \value{
 Object (list) of class robotstxt with parsed data from a
@@ -49,6 +52,7 @@ domains root and no bot in particular. check() has two arguments:
 paths and bot. The first is for supplying the paths for which to check
 permissions and the latter to put in the name of the bot.}
 }}
+
 \examples{
 \dontrun{
 rt <- robotstxt(domain="google.com")
@@ -58,4 +62,3 @@ rt$check( paths = c("/", "forbidden"), bot="*")
 }
 
 }
-

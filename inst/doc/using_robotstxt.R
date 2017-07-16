@@ -8,7 +8,11 @@ library(robotstxt)
 library(dplyr)
 
 ## ---- include=FALSE------------------------------------------------------
-rtxt <- robotstxt(domain="wikipedia.org", text=robotstxt:::rt_get_rtxt("robots_wikipedia.txt"))
+rtxt <- 
+  robotstxt(
+    domain = "wikipedia.org", 
+    text   = robotstxt:::rt_get_rtxt("robots_wikipedia.txt")
+  )
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  rtxt <- robotstxt(domain="wikipedia.org")
