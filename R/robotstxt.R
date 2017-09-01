@@ -1,14 +1,12 @@
-
-
 #' Generate a representations of a robots.txt file
 #'
 #' The function generates a list that entails data resulting from parsing a robots.txt file
-#' as well as a funtion called check that enables to ask the representation if bot (or
+#' as well as a function called check that enables to ask the representation if bot (or
 #' particular bots) are allowed to access a resource on the domain.
 #'
-#' @param domain Domain for which to genarate a representation. If text equals to NULL,
+#' @param domain Domain for which to generate a representation. If text equals to NULL,
 #' the function will download the file from server - the default.
-#' @param text If automatic download of the robots.txt is not prefered, the text can be
+#' @param text If automatic download of the robots.txt is not preferred, the text can be
 #' supplied directly.
 #' @inheritParams get_robotstxt
 #'
@@ -23,10 +21,10 @@
 #'   file is valid; will be set to NA if not supplied on initialization
 #'
 #' @field text character vector of text of robots.txt file; either supplied on
-#'   initializetion or automatically downloaded from domain supplied on
+#'   initialization or automatically downloaded from domain supplied on
 #'   initialization
 #'
-#' @field bots character vector of bot names mentionend in robots.txt
+#' @field bots character vector of bot names mentioned in robots.txt
 #'
 #' @field permissions data.frame of bot permissions found in robots.txt file
 #'
@@ -98,47 +96,5 @@ robotstxt <-
     class(self) <- "robotstxt"
     return(self)
   }
-
-
-#' printing robotstxt_text
-#' @param x character vector aka robotstxt$text to be printed
-#' @param ... goes down the sink
-#' @export
-print.robotstxt_text <- function(x, ...){
-  cat(x)
-  invisible(x)
-}
-
-#' printing robotstxt
-#' @param x robotstxt instance to be printed
-#' @param ... goes down the sink
-#' @export
-print.robotstxt <- function(x, ...){
-  tmp <- x
-  tmp_text <- unlist(stringr::str_split(tmp$text, "\n"))
-  if( length(tmp_text) > 15 ){
-    tmp$text <-
-      paste0( c(tmp_text[1:10], "", paste0("[... ",length(tmp_text)-10," lines omitted ...]")), collapse = "\n")
-  }
-  if( length(tmp$bots) > 7 ){
-    tmp$bots <-
-      c(utils::head(tmp$bots), "", paste("[... ", length(tmp$bots)-5, "items omitted ...]") )
-  }
-  for(i in c("permissions", "crawl_delay", "host", "sitemap", "other") ){
-    if( dim(tmp[[i]])[1] > 7  ){
-      tmp_fill <- data.frame(cbind( paste("[... ", dim(tmp[[i]])[1]-5, "items omitted ...]"), "",""))
-      names(tmp_fill) <- names(tmp[[i]])
-      tmp[[i]]  <- rbind( utils::head(tmp[[i]]), "", tmp_fill )
-    }
-  }
-  if( dim(tmp$comments)[1] > 7 ){
-    tmp_fill <- data.frame(cbind( "", paste("[... ", dim(tmp[["comments"]])[1]-5, "items omitted ...]")))
-    names(tmp_fill) <- names(tmp[["comments"]])
-    tmp[["comments"]]  <- rbind( utils::head(tmp[["comments"]]), "", tmp_fill )
-  }
-  print.default(tmp)
-  invisible(x)
-}
-
 
 

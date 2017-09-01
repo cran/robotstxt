@@ -12,7 +12,7 @@
 
 <meta name="author" content="Peter Meissner" />
 
-<meta name="date" content="2017-07-16" />
+<meta name="date" content="2017-09-01" />
 
 <title>Using Robotstxt</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Using Robotstxt</h1>
 <h4 class="author"><em>Peter Meissner</em></h4>
-<h4 class="date"><em>2017-07-16</em></h4>
+<h4 class="date"><em>2017-09-01</em></h4>
 
 
 
@@ -185,20 +185,20 @@ Crawl-Delay: 5</code></pre>
 ##     sapply(paths, path_allowed, permissions = self$permissions, 
 ##         bot = bot)
 ## }
-## &lt;bytecode: 0x3f280f0&gt;
-## &lt;environment: 0x18e8fe8&gt;
+## &lt;bytecode: 0x0000000016ed7250&gt;
+## &lt;environment: 0x000000001ca59b98&gt;
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;robotstxt&quot;</code></pre>
 <p>Checking permissions works via <code>rtxt</code>’s <code>check</code> method by providing one or more paths. If no bot name is provided <code>&quot;*&quot;</code> - meaning any bot - is assumed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># checking for access permissions</span>
-rtxt$<span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;*&quot;</span>)</code></pre></div>
+rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;*&quot;</span>)</code></pre></div>
 <pre><code>##     /  api/ 
 ## FALSE FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rtxt$<span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Orthogaffe&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Orthogaffe&quot;</span>)</code></pre></div>
 <pre><code>##    / api/ 
 ## TRUE TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rtxt$<span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Mediapartners-Google*  &quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Mediapartners-Google*  &quot;</span>)</code></pre></div>
 <pre><code>##     /  api/ 
 ## FALSE FALSE</code></pre>
 </div>
@@ -285,7 +285,7 @@ r_parsed</code></pre></div>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
