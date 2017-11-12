@@ -1,31 +1,57 @@
 NEWS robotstxt
 ==========================================================================
 
+
+0.5.2 | 2017-11-12
+--------------------------------------------------------------------------
+
+- **fix** : rt_get_rtxt() would break on Windows due trying to readLines() from folder
+
+
+
+
+0.5.1 | 2017-11-11
+--------------------------------------------------------------------------
+
+- **change** : spiderbar is now non-default second (experimental) check method
+- **fix** : there were warnings in case of multiple domain guessing
+
+
+
+0.5.0 | 2017-10-07
+--------------------------------------------------------------------------
+
+- **feature** : spiderbar's can_fetch() was added, now one can choose which check method to use for checking access rights 
+- **feature** : use futures (from package future) to speed up retrieval and parsing
+- **feature** : now there is a `get_robotstxts()` function wich is a 'vectorized' version of `get_robotstxt()`
+- **feature** : `paths_allowed()` now allows checking via either robotstxt parsed robots.txt files or via functionality provided by the spiderbar package (the latter should be faster by approximatly factor 10)
+- **feature** : various functions now have a ssl_verifypeer option (analog to CURL option https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYPEER.html) which might help with robots.txt file retrieval in some cases
+- **change** : user_agent for robots.txt file retrieval will now default to: `sessionInfo()$R.version$version.string` 
+- **change** : robotstxt now assumes it knows how to parse --> if it cannot parse it assumes that it got no valid robots.txt file meaning that there are no restrictions
+- **fix** : valid_robotstxt would not accept some actual valid robotstxt files
+
+
+
 0.4.1 | 2017-08-20
 --------------------------------------------------------------------------
 
-- restructure : put each function in separate file
-- fix : parsing would go bonkers for robots.txt of cdc.gov (e.g. combining all robots with all permissions) due to errornous handling of carriage return character
-
+- **restructure** : put each function in separate file
+- **fix** : parsing would go bonkers for robots.txt of cdc.gov (e.g. combining all robots with all permissions) due to errornous handling of carriage return character (reported by @hrbrmstr - thanks)
 
 
 
 0.4.0 | 2017-07-14
 --------------------------------------------------------------------------
 
-- user_agent parameter added to tobotstxt() and paths_allowed to allow for user defined HTTP user-agent send when retrieving robots.txt file from domain
-
+- **user_agent** parameter **added** to robotstxt() and paths_allowed to allow for user defined HTTP user-agent send when retrieving robots.txt file from domain
 
 
 
 0.3.4 | 2017-07-08
 --------------------------------------------------------------------------
 
-- fix : non robots.txt files (e.g. html files returned by server instead of 
-the requested robots.txt / facebook.com) would be handled as if it were non 
-existent / empty files 
-- fix : UTF-8 encoded robots.txt with BOM (byte order mark) would break parsing
-although files were otherwise valid robots.txt files
+- **fix** : non robots.txt files (e.g. html files returned by server instead of the requested robots.txt / facebook.com) would be handled as if it were non existent / empty files (reported by @simonmunzert - thanks)
+- **fix** : UTF-8 encoded robots.txt with BOM (byte order mark) would break parsing although files were otherwise valid robots.txt files
 
 
 
