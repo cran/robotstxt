@@ -1,9 +1,9 @@
 Package: robotstxt
-Date: 2017-11-12
+Date: 2018-02-10
 Type: Package
 Title: A 'robots.txt' Parser and 'Webbot'/'Spider'/'Crawler'
         Permissions Checker
-Version: 0.5.2
+Version: 0.6.0
 Authors@R: c(
         person(
           "Peter", "Meissner", role = c("aut", "cre"),
@@ -27,10 +27,10 @@ Depends: R (>= 3.0.0)
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-11-12 17:41:05 UTC; peter
+Packaged: 2018-02-11 12:41:55 UTC; peter
 Author: Peter Meissner [aut, cre],
   Oliver Keys [ctb],
   Rich Fitz John [ctb]
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
 Repository: CRAN
-Date/Publication: 2017-11-12 17:45:33 UTC
+Date/Publication: 2018-02-11 14:19:44 UTC
