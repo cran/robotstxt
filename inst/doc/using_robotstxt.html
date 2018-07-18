@@ -12,7 +12,7 @@
 
 <meta name="author" content="Peter Meissner" />
 
-<meta name="date" content="2018-02-11" />
+<meta name="date" content="2018-07-18" />
 
 <title>Using Robotstxt</title>
 
@@ -270,15 +270,15 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Using Robotstxt</h1>
 <h4 class="author"><em>Peter Meissner</em></h4>
-<h4 class="date"><em>2018-02-11</em></h4>
+<h4 class="date"><em>2018-07-18</em></h4>
 
 
 
-<section id="description" class="level1">
+<div id="description" class="section level1">
 <h1>Description</h1>
 <p>The package provides a simple ‘robotstxt’ class and accompanying methods to parse and check ‘robots.txt’ files. Data fields are provided as data frames and vectors. Permissions can be checked by providing path character vectors and optional bot names.</p>
-</section>
-<section id="robots.txt-files" class="level1">
+</div>
+<div id="robots.txt-files" class="section level1">
 <h1>Robots.txt files</h1>
 <p>Robots.txt files are a way to kindly ask webbots, spiders, crawlers, wanderers and the like to access or not access certain parts of a webpage. The de facto ‘standard’ never made it beyond a informal <a href="http://www.robotstxt.org/norobots-rfc.txt">“Network Working Group INTERNET DRAFT”</a>. Nonetheless, the use of robots.txt files is widespread (e.g. <a href="https://wikipedia.org/robots.txt" class="uri">https://wikipedia.org/robots.txt</a>, <a href="https://google.com/robots.txt" class="uri">https://google.com/robots.txt</a>) and bots from Google, Yahoo and the like will adhere to the rules defined in robots.txt files - although, their interpretation of those rules might differ.</p>
 <p>As the name of the files already suggests robots.txt files are plain text and always found at the root of a domain. The syntax of the files in essence follows a <code>fieldname: value</code> scheme with optional preceding <code>user-agent: ...</code> lines to indicate the scope of the following rule block. Blocks are separated by blank lines and the omission of a user-agent field (which directly corresponds to the HTTP user-agent field) is seen as referring to all bots. <code>#</code> serves to comment lines and parts of lines. Everything after <code>#</code> until the end of line is regarded a comment. Possible field names are: user-agent, disallow, allow, crawl-delay, sitemap, and host.</p>
@@ -297,29 +297,31 @@ Allow: /shinystuff/
 
 Crawl-Delay: 5</code></pre>
 <p>For more information have a look at: <a href="http://www.robotstxt.org/norobots-rfc.txt" class="uri">http://www.robotstxt.org/norobots-rfc.txt</a>, where the robots.txt file ‘standard’ is described formally. Valuable introductions can be found at <a href="http://www.robotstxt.org/robotstxt.html" class="uri">http://www.robotstxt.org/robotstxt.html</a> as well as at <a href="https://en.wikipedia.org/wiki/Robots_exclusion_standard" class="uri">https://en.wikipedia.org/wiki/Robots_exclusion_standard</a> - of cause.</p>
-</section>
-<section id="fast-food-usage-for-the-uninterested" class="level1">
+</div>
+<div id="fast-food-usage-for-the-uninterested" class="section level1">
 <h1>Fast food usage for the uninterested</h1>
 <pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(robotstxt)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">paths_allowed</span>(<span class="st">&quot;http://google.com/&quot;</span>)</a></code></pre>
+<pre><code>## Warning in is.na(x): is.na() applied to non-(list or vector) of type 'NULL'</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">paths_allowed</span>(<span class="st">&quot;http://google.com/search&quot;</span>)</a></code></pre>
+<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">paths_allowed</span>(<span class="st">&quot;http://google.com/search&quot;</span>)</a></code></pre>
+<pre><code>## Warning in is.na(x): is.na() applied to non-(list or vector) of type 'NULL'</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-</section>
-<section id="example-usage" class="level1">
+</div>
+<div id="example-usage" class="section level1">
 <h1>Example Usage</h1>
 <p>First, let us load the package. In addition we load the dplyr package to be able to use the magrittr pipe operator <code>%&gt;%</code> and some easy to read and remember data manipulation functions.</p>
-<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(robotstxt)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre>
-<section id="object-oriented-style" class="level2">
+<pre class="sourceCode r" id="cb8"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(robotstxt)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre>
+<div id="object-oriented-style" class="section level2">
 <h2>object oriented style</h2>
 <p>The first step is to create an instance of the robotstxt class provided by the package. The instance has to be initiated via providing either domain or the actual text of the robots.txt file. If only the domain is provided, the robots.txt file will be downloaded automatically. Have a look at <code>?robotstxt</code> for descriptions of all data fields and methods as well as their parameters.</p>
-<pre class="sourceCode r" id="cb7"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">rtxt &lt;-<span class="st"> </span><span class="kw">robotstxt</span>(<span class="dt">domain=</span><span class="st">&quot;wikipedia.org&quot;</span>)</a></code></pre>
+<pre class="sourceCode r" id="cb9"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">rtxt &lt;-<span class="st"> </span><span class="kw">robotstxt</span>(<span class="dt">domain=</span><span class="st">&quot;wikipedia.org&quot;</span>)</a></code></pre>
 <p><code>rtxt</code> is of class <code>robotstxt</code>.</p>
-<pre class="sourceCode r" id="cb8"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">class</span>(rtxt)</a></code></pre>
+<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">class</span>(rtxt)</a></code></pre>
 <pre><code>## [1] &quot;robotstxt&quot;</code></pre>
 <p>Printing the object lets us glance at all data fields and methods in <code>rtxt</code> - we have access to the text as well as all common fields. Non-standard fields are collected in <code>other</code>.</p>
-<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">rtxt</a></code></pre>
+<pre class="sourceCode r" id="cb12"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">rtxt</a></code></pre>
 <pre><code>## $text
 ## [1] &quot;#\n# robots.txt for http://www.wikipedia.org/ and friends\n#\n# Please note: There are a lot of pages on this site, and there are\n# some misbehaved spiders out there that go _way_ too fast. If you're\n# irresponsible, your access to the site may be blocked.\n#\n\n# advertising-related bots:\nUser-agent: Mediapartners-Google*\n\n[... 653 lines omitted ...]&quot;
 ## 
@@ -387,25 +389,25 @@ Crawl-Delay: 5</code></pre>
 ##     spiderbar::can_fetch(obj = self$robexclobj, path = paths, 
 ##         user_agent = bot)
 ## }
-## &lt;environment: 0x000000001948cad0&gt;
+## &lt;environment: 0x000000001b65cf18&gt;
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;robotstxt&quot;</code></pre>
 <p>Checking permissions works via <code>rtxt</code>’s <code>check</code> method by providing one or more paths. If no bot name is provided <code>&quot;*&quot;</code> - meaning any bot - is assumed.</p>
-<pre class="sourceCode r" id="cb12"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># checking for access permissions</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;*&quot;</span>)</a></code></pre>
+<pre class="sourceCode r" id="cb14"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># checking for access permissions</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;*&quot;</span>)</a></code></pre>
 <pre><code>## [1]  TRUE FALSE</code></pre>
-<pre class="sourceCode r" id="cb14"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Orthogaffe&quot;</span>)</a></code></pre>
+<pre class="sourceCode r" id="cb16"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Orthogaffe&quot;</span>)</a></code></pre>
 <pre><code>## [1] TRUE TRUE</code></pre>
-<pre class="sourceCode r" id="cb16"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Mediapartners-Google*  &quot;</span>)</a></code></pre>
+<pre class="sourceCode r" id="cb18"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Mediapartners-Google*  &quot;</span>)</a></code></pre>
 <pre><code>## [1]  TRUE FALSE</code></pre>
-</section>
-<section id="functional-style" class="level2">
+</div>
+<div id="functional-style" class="section level2">
 <h2>functional style</h2>
 <p>While working with the robotstxt class is recommended the checking can be done with functions only as well. In the following we (1) download the robots.txt file; (2) parse it and (3) check permissions.</p>
-<pre class="sourceCode r" id="cb18"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">r_text        &lt;-<span class="st"> </span><span class="kw">get_robotstxt</span>(<span class="st">&quot;nytimes.com&quot;</span>) </a></code></pre>
-<pre class="sourceCode r" id="cb19"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">r_parsed &lt;-<span class="st"> </span><span class="kw">parse_robotstxt</span>(r_text)</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">r_parsed</a></code></pre>
+<pre class="sourceCode r" id="cb20"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">r_text        &lt;-<span class="st"> </span><span class="kw">get_robotstxt</span>(<span class="st">&quot;nytimes.com&quot;</span>) </a></code></pre>
+<pre class="sourceCode r" id="cb21"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">r_parsed &lt;-<span class="st"> </span><span class="kw">parse_robotstxt</span>(r_text)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">r_parsed</a></code></pre>
 <pre><code>## $useragents
 ## [1] &quot;*&quot;                    &quot;Mediapartners-Google&quot; &quot;AdsBot-Google&quot;       
 ## [4] &quot;adidxbot&quot;            
@@ -467,17 +469,18 @@ Crawl-Delay: 5</code></pre>
 ## $other
 ## [1] field     useragent value    
 ## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
-<pre class="sourceCode r" id="cb21"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">  <span class="dt">paths  =</span> <span class="kw">c</span>(<span class="st">&quot;images/&quot;</span>,<span class="st">&quot;/search&quot;</span>), </a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">  <span class="dt">domain =</span> <span class="kw">c</span>(<span class="st">&quot;wikipedia.org&quot;</span>, <span class="st">&quot;google.com&quot;</span>),</a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">  <span class="dt">bot    =</span> <span class="st">&quot;Orthogaffe&quot;</span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5">)</a></code></pre>
+<pre class="sourceCode r" id="cb23"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">paths_allowed</span>(</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="dt">paths  =</span> <span class="kw">c</span>(<span class="st">&quot;images/&quot;</span>,<span class="st">&quot;/search&quot;</span>), </a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">  <span class="dt">domain =</span> <span class="kw">c</span>(<span class="st">&quot;wikipedia.org&quot;</span>, <span class="st">&quot;google.com&quot;</span>),</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">  <span class="dt">bot    =</span> <span class="st">&quot;Orthogaffe&quot;</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">)</a></code></pre>
+<pre><code>## Warning in is.na(x): is.na() applied to non-(list or vector) of type 'NULL'</code></pre>
 <pre><code>## 
  wikipedia.org                      
- google.com</code></pre>
+ google.com                      No encoding supplied: defaulting to UTF-8.</code></pre>
 <pre><code>## [1]  TRUE FALSE</code></pre>
-</section>
-</section>
+</div>
+</div>
 
 
 

@@ -2,6 +2,22 @@ NEWS robotstxt
 ==========================================================================
 
 
+
+0.6.2 | 2018-07-18
+--------------------------------------------------------------------------
+
+- **minor** : changed from `future::future_lapply()` to `future.apply::future_lapply()` to make package compatible with versions of future after 1.8.1
+
+
+
+
+0.6.1 | 2018-05-30
+--------------------------------------------------------------------------
+
+- **minor** : package was moved to other repo location and project status badge was added
+
+
+
 0.6.0 | 2018-02-10
 --------------------------------------------------------------------------
 
