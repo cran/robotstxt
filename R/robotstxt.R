@@ -41,7 +41,7 @@
 #' domains root and no bot in particular. check() has two arguments:
 #' paths and bot. The first is for supplying the paths for which to check
 #' permissions and the latter to put in the name of the bot.
-#'
+#' Please, note that path to a folder should end with a trailing slash ("/").
 #'
 #'
 #' @examples
@@ -54,11 +54,18 @@
 #'
 robotstxt <-
   function(
-    domain     = NULL,
-    text       = NULL,
-    user_agent = NULL,
-    warn       = TRUE,
-    force      = FALSE
+    domain                = NULL,
+    text                  = NULL,
+    user_agent            = NULL,
+    warn                  = getOption("robotstxt_warn", TRUE),
+    force                 = FALSE,
+    on_server_error       = on_server_error_default,
+    on_client_error       = on_client_error_default,
+    on_not_found          = on_not_found_default,
+    on_redirect           = on_redirect_default,
+    on_domain_change      = on_domain_change_default,
+    on_file_type_mismatch = on_file_type_mismatch_default,
+    on_suspect_content    = on_suspect_content_default
   ) {
 
     ## check input
@@ -85,7 +92,14 @@ robotstxt <-
             domain     = domain,
             user_agent = user_agent,
             warn       = warn,
-            force      = force
+            force      = force,
+            on_server_error       = on_server_error       ,
+            on_client_error       = on_client_error       ,
+            on_not_found          = on_not_found          ,
+            on_redirect           = on_redirect           ,
+            on_domain_change      = on_domain_change      ,
+            on_file_type_mismatch = on_file_type_mismatch ,
+            on_suspect_content    = on_suspect_content
           )
 
       }else{
@@ -98,6 +112,7 @@ robotstxt <-
     ## fill fields with default data
 
     tmp <- parse_robotstxt(self$text)
+    self$robexclobj  <- spiderbar::robxp(self$text)
     self$bots        <- tmp$useragents
     self$comments    <- tmp$comments
     self$permissions <- tmp$permissions
@@ -105,7 +120,6 @@ robotstxt <-
     self$host        <- tmp$host
     self$sitemap     <- tmp$sitemap
     self$other       <- tmp$other
-    self$robexclobj  <- spiderbar::robxp(self$text)
 
     self$check <-
       function(paths="/", bot="*"){

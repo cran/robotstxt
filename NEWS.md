@@ -3,6 +3,58 @@ NEWS robotstxt
 
 
 
+
+0.7.3 | 2020-05-29
+--------------------------------------------------------------------------
+
+- **minor** : improve printing of robots.txt
+- add request data as attribute to robots.txt
+- add `as.list()` method for robots.txt
+- adding several paragrpahs to the README file
+- **major** : finishing handlers - quality check, documentation
+- **fix** : Partial matching warnings #51 - reported by @mine-cetinkaya-rundel
+
+
+
+0.7.2 | 2020-05-04
+--------------------------------------------------------------------------
+
+- **minor** : changes in dependencies were introducing errors when no scheme/protocoll was provided in URL -- fixed https://github.com/ropensci/robotstxt/issues/50
+
+
+
+0.7.1 | 2018-01-09
+--------------------------------------------------------------------------
+
+- **minor** : modifying robots.txt parser to be more robust against different formatting of robots.txt files -- fixed https://github.com/ropensci/robotstxt/issues/48
+
+
+
+
+
+0.7.0 | 2018-11-27
+--------------------------------------------------------------------------
+
+- **major** : introducing http handler to allow for better interpretation of robots.txt files in case of certain events: redirects, server error, client error, suspicous content, ...
+
+
+
+0.6.4 | 2018-09-14
+--------------------------------------------------------------------------
+
+- **minor** : pass through of parameter for content encoding 
+
+
+
+0.6.3 | 2018-09-14
+--------------------------------------------------------------------------
+
+- **minor** : introduced parameter encoding to `get_robotstxt()` that defaults to "UTF-8" which does the content function anyways - but now it will not complain about it
+- **minor** : added comment to help files specifying use of trailing slash in paths pointing to folders in `paths_allowed` and `robotstxt`.
+
+
+
+
 0.6.2 | 2018-07-18
 --------------------------------------------------------------------------
 

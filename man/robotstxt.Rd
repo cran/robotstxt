@@ -4,8 +4,20 @@
 \alias{robotstxt}
 \title{Generate a representations of a robots.txt file}
 \usage{
-robotstxt(domain = NULL, text = NULL, user_agent = NULL, warn = TRUE,
-  force = FALSE)
+robotstxt(
+  domain = NULL,
+  text = NULL,
+  user_agent = NULL,
+  warn = getOption("robotstxt_warn", TRUE),
+  force = FALSE,
+  on_server_error = on_server_error_default,
+  on_client_error = on_client_error_default,
+  on_not_found = on_not_found_default,
+  on_redirect = on_redirect_default,
+  on_domain_change = on_domain_change_default,
+  on_file_type_mismatch = on_file_type_mismatch_default,
+  on_suspect_content = on_suspect_content_default
+)
 }
 \arguments{
 \item{domain}{Domain for which to generate a representation. If text equals to NULL,
@@ -22,6 +34,24 @@ file from domain}
 \item{force}{if TRUE instead of using possible cached results the function
 will re-download the robotstxt file HTTP response status 404. If this
 happens,}
+
+\item{on_server_error}{request state handler for any 5xx status}
+
+\item{on_client_error}{request state handler for any 4xx HTTP status that is
+not 404}
+
+\item{on_not_found}{request state handler for HTTP status 404}
+
+\item{on_redirect}{request state handler for any 3xx HTTP status}
+
+\item{on_domain_change}{request state handler for any 3xx HTTP status where
+domain did change as well}
+
+\item{on_file_type_mismatch}{request state handler for content type other
+than 'text/plain'}
+
+\item{on_suspect_content}{request state handler for content that seems to be
+something else than a robots.txt file (usually a JSON, XML or HTML)}
 }
 \value{
 Object (list) of class robotstxt with parsed data from a
@@ -57,7 +87,8 @@ robots.txt file}
 \item{\code{check()}}{Method to check for bot permissions. Defaults to the
 domains root and no bot in particular. check() has two arguments:
 paths and bot. The first is for supplying the paths for which to check
-permissions and the latter to put in the name of the bot.}
+permissions and the latter to put in the name of the bot.
+Please, note that path to a folder should end with a trailing slash ("/").}
 }}
 
 \examples{
