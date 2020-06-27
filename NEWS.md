@@ -2,6 +2,26 @@ NEWS robotstxt
 ==========================================================================
 
 
+0.7.7 | 2020-06-17
+--------------------------------------------------------------------------
+
+- fix problem in rt_request_handler - reported by @MHWauben https://github.com/dmi3kno/polite/issues/28 - patch by @dmi3kno
+
+
+
+0.7.6 | 2020-06-13
+--------------------------------------------------------------------------
+
+- make info whether or not results were cached available - requested by @dmi3kno, https://github.com/ropensci/robotstxt/issues/53
+
+
+
+
+0.7.5 | 2020-06-07
+--------------------------------------------------------------------------
+
+- **fix** passing through more parameters from robotstxt() to get_robotstxt() - reported and implemented by @dmi3kno
+
 
 
 0.7.3 | 2020-05-29
