@@ -12,7 +12,7 @@
 
 <meta name="author" content="Peter Meissner" />
 
-<meta name="date" content="2020-06-27" />
+<meta name="date" content="2020-07-25" />
 
 <title>Using Robotstxt</title>
 
@@ -20,9 +20,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -32,14 +32,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -48,9 +50,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -351,7 +353,7 @@ code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a617
 
 <h1 class="title toc-ignore">Using Robotstxt</h1>
 <h4 class="author">Peter Meissner</h4>
-<h4 class="date">2020-06-27</h4>
+<h4 class="date">2020-07-25</h4>
 
 
 <div id="TOC">
@@ -375,44 +377,43 @@ code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a617
 <p>Robots.txt files are a way to kindly ask webbots, spiders, crawlers, wanderers and the like to access or not access certain parts of a webpage. The de facto ‘standard’ never made it beyond a informal <a href="http://www.robotstxt.org/norobots-rfc.txt">“Network Working Group INTERNET DRAFT”</a>. Nonetheless, the use of robots.txt files is widespread (e.g. <a href="https://wikipedia.org/robots.txt" class="uri">https://wikipedia.org/robots.txt</a>, <a href="https://google.com/robots.txt" class="uri">https://google.com/robots.txt</a>) and bots from Google, Yahoo and the like will adhere to the rules defined in robots.txt files - although, their interpretation of those rules might differ (e.g. <a href="https://developers.google.com/search/reference/robots_txt">rules for googlebot</a>).</p>
 <p>As the name of the files already suggests robots.txt files are plain text and always found at the root of a domain. The syntax of the files in essence follows a <code>fieldname: value</code> scheme with optional preceding <code>user-agent: ...</code> lines to indicate the scope of the following rule block. Blocks are separated by blank lines and the omission of a user-agent field (which directly corresponds to the HTTP user-agent field) is seen as referring to all bots. <code>#</code> serves to comment lines and parts of lines. Everything after <code>#</code> until the end of line is regarded a comment. Possible field names are: user-agent, disallow, allow, crawl-delay, sitemap, and host.</p>
 <p>Let us have an example file to get an idea how a robots.txt file might look like. The file below starts with a comment line followed by a line disallowing access to any content – everything that is contained in root (“<code>/</code>”) – for all bots. The next block concerns GoodBot and NiceBot. Those two get the previous permissions lifted by being disallowed nothing. The third block is for PrettyBot. PrettyBot likes shiny stuff and therefor gets a special permission for everything contained in the “<code>/shinystuff/</code>” folder while all other restrictions still hold. In the last block all bots are asked to pause at least 5 seconds between two visits.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode robots.txt"><code class="sourceCode default"><a class="sourceLine" id="cb1-1" title="1"># this is a comment </a>
-<a class="sourceLine" id="cb1-2" title="2"># a made up example of an robots.txt file</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4">Disallow: /</a>
-<a class="sourceLine" id="cb1-5" title="5"></a>
-<a class="sourceLine" id="cb1-6" title="6">User-agent: GoodBot # another comment</a>
-<a class="sourceLine" id="cb1-7" title="7">User-agent: NiceBot</a>
-<a class="sourceLine" id="cb1-8" title="8">Disallow: </a>
-<a class="sourceLine" id="cb1-9" title="9"></a>
-<a class="sourceLine" id="cb1-10" title="10">User-agent: PrettyBot</a>
-<a class="sourceLine" id="cb1-11" title="11">Allow: /shinystuff/</a>
-<a class="sourceLine" id="cb1-12" title="12"></a>
-<a class="sourceLine" id="cb1-13" title="13">Crawl-Delay: 5</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode robots.txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1"></a># this is a comment </span>
+<span id="cb1-2"><a href="#cb1-2"></a># a made up example of an robots.txt file</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>Disallow: /</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>User-agent: GoodBot # another comment</span>
+<span id="cb1-7"><a href="#cb1-7"></a>User-agent: NiceBot</span>
+<span id="cb1-8"><a href="#cb1-8"></a>Disallow: </span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>User-agent: PrettyBot</span>
+<span id="cb1-11"><a href="#cb1-11"></a>Allow: /shinystuff/</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>Crawl-Delay: 5</span></code></pre></div>
 <p>For more information have a look at: <a href="http://www.robotstxt.org/norobots-rfc.txt" class="uri">http://www.robotstxt.org/norobots-rfc.txt</a>, where the robots.txt file ‘standard’ is described formally. Valuable introductions can be found at <a href="http://www.robotstxt.org/robotstxt.html" class="uri">http://www.robotstxt.org/robotstxt.html</a> as well as at <a href="https://en.wikipedia.org/wiki/Robots_exclusion_standard" class="uri">https://en.wikipedia.org/wiki/Robots_exclusion_standard</a> - of cause.</p>
 </div>
 <div id="fast-food-usage-for-the-uninterested" class="section level1">
 <h1>Fast food usage for the uninterested</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(robotstxt)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">paths_allowed</span>(<span class="st">&quot;http://google.com/&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(robotstxt)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">paths_allowed</span>(<span class="st">&quot;http://google.com/&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">paths_allowed</span>(<span class="st">&quot;http://google.com/search&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">paths_allowed</span>(<span class="st">&quot;http://google.com/search&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 </div>
 <div id="example-usage" class="section level1">
 <h1>Example Usage</h1>
 <p>First, let us load the package. In addition we load the dplyr package to be able to use the magrittr pipe operator <code>%&gt;%</code> and some easy to read and remember data manipulation functions.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(robotstxt)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.2</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">library</span>(robotstxt)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <div id="object-oriented-style" class="section level2">
 <h2>object oriented style</h2>
 <p>The first step is to create an instance of the robotstxt class provided by the package. The instance has to be initiated via providing either domain or the actual text of the robots.txt file. If only the domain is provided, the robots.txt file will be downloaded automatically. Have a look at <code>?robotstxt</code> for descriptions of all data fields and methods as well as their parameters.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">rtxt &lt;-<span class="st"> </span><span class="kw">robotstxt</span>(<span class="dt">domain=</span><span class="st">&quot;wikipedia.org&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>rtxt &lt;-<span class="st"> </span><span class="kw">robotstxt</span>(<span class="dt">domain=</span><span class="st">&quot;wikipedia.org&quot;</span>)</span></code></pre></div>
 <p><code>rtxt</code> is of class <code>robotstxt</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">class</span>(rtxt)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">class</span>(rtxt)</span></code></pre></div>
 <pre><code>## [1] &quot;robotstxt&quot;</code></pre>
 <p>Printing the object lets us glance at all data fields and methods in <code>rtxt</code> - we have access to the text as well as all common fields. Non-standard fields are collected in <code>other</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">rtxt</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>rtxt</span></code></pre></div>
 <pre><code>## $text
 ## [1] &quot;#\n# robots.txt for http://www.wikipedia.org/ and friends\n#\n# Please note: There are a lot of pages on this site, and there are\n# some misbehaved spiders out there that go _way_ too fast. If you&#39;re\n# irresponsible, your access to the site may be blocked.\n#\n\n# advertising-related bots:\nUser-agent: Mediapartners-Google*\n\n[... 653 lines omitted ...]&quot;
 ## 
@@ -471,26 +472,26 @@ code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a617
 ##     spiderbar::can_fetch(obj = self$robexclobj, path = paths, 
 ##         user_agent = bot)
 ## }
-## &lt;bytecode: 0x0000000017eec0a8&gt;
-## &lt;environment: 0x0000000017eeb4a0&gt;
+## &lt;bytecode: 0x0000000018d35510&gt;
+## &lt;environment: 0x0000000018d34908&gt;
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;robotstxt&quot;</code></pre>
 <p>Checking permissions works via <code>rtxt</code>’s <code>check</code> method by providing one or more paths. If no bot name is provided <code>&quot;*&quot;</code> - meaning any bot - is assumed.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># checking for access permissions</span></a>
-<a class="sourceLine" id="cb13-2" title="2">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;*&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># checking for access permissions</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;*&quot;</span>)</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Orthogaffe&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Orthogaffe&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Mediapartners-Google*  &quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>rtxt<span class="op">$</span><span class="kw">check</span>(<span class="dt">paths =</span> <span class="kw">c</span>(<span class="st">&quot;/&quot;</span>,<span class="st">&quot;api/&quot;</span>), <span class="dt">bot =</span> <span class="st">&quot;Mediapartners-Google*  &quot;</span>)</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE</code></pre>
 </div>
 <div id="functional-style" class="section level2">
 <h2>functional style</h2>
 <p>While working with the robotstxt class is recommended the checking can be done with functions only as well. In the following we (1) download the robots.txt file; (2) parse it and (3) check permissions.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">r_text        &lt;-<span class="st"> </span><span class="kw">get_robotstxt</span>(<span class="st">&quot;nytimes.com&quot;</span>) </a></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">r_parsed &lt;-<span class="st"> </span><span class="kw">parse_robotstxt</span>(r_text)</a>
-<a class="sourceLine" id="cb20-2" title="2">r_parsed</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>r_text        &lt;-<span class="st"> </span><span class="kw">get_robotstxt</span>(<span class="st">&quot;nytimes.com&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>r_parsed &lt;-<span class="st"> </span><span class="kw">parse_robotstxt</span>(r_text)</span>
+<span id="cb19-2"><a href="#cb19-2"></a>r_parsed</span></code></pre></div>
 <pre><code>## $useragents
 ## [1] &quot;*&quot;                    &quot;Mediapartners-Google&quot; &quot;AdsBot-Google&quot;       
 ## [4] &quot;adidxbot&quot;            
@@ -552,11 +553,11 @@ code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a617
 ## $other
 ## [1] field     useragent value    
 ## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">paths_allowed</span>(</a>
-<a class="sourceLine" id="cb22-2" title="2">  <span class="dt">paths  =</span> <span class="kw">c</span>(<span class="st">&quot;images/&quot;</span>,<span class="st">&quot;/search&quot;</span>), </a>
-<a class="sourceLine" id="cb22-3" title="3">  <span class="dt">domain =</span> <span class="kw">c</span>(<span class="st">&quot;wikipedia.org&quot;</span>, <span class="st">&quot;google.com&quot;</span>),</a>
-<a class="sourceLine" id="cb22-4" title="4">  <span class="dt">bot    =</span> <span class="st">&quot;Orthogaffe&quot;</span></a>
-<a class="sourceLine" id="cb22-5" title="5">)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">paths_allowed</span>(</span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="dt">paths  =</span> <span class="kw">c</span>(<span class="st">&quot;images/&quot;</span>,<span class="st">&quot;/search&quot;</span>), </span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="dt">domain =</span> <span class="kw">c</span>(<span class="st">&quot;wikipedia.org&quot;</span>, <span class="st">&quot;google.com&quot;</span>),</span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="dt">bot    =</span> <span class="st">&quot;Orthogaffe&quot;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>)</span></code></pre></div>
 <pre><code>## 
  wikipedia.org                      
  google.com</code></pre>

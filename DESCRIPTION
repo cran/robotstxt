@@ -1,9 +1,9 @@
 Package: robotstxt
-Date: 2020-06-27
+Date: 2020-07-22
 Type: Package
 Title: A 'robots.txt' Parser and 'Webbot'/'Spider'/'Crawler'
         Permissions Checker
-Version: 0.7.7
+Version: 0.7.8
 Authors@R: c(
         person(
           "Peter", "Meissner", role = c("aut", "cre"),
@@ -33,11 +33,11 @@ VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2020-06-27 05:36:07 UTC; peter.meissner
+Packaged: 2020-07-25 08:07:56 UTC; peter
 Author: Peter Meissner [aut, cre],
   Kun Ren [aut, cph] (Author and copyright holder of list_merge.R.),
   Oliver Keys [ctb] (original release code review),
   Rich Fitz John [ctb] (original release code review)
 Maintainer: Peter Meissner <retep.meissner@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-06-27 07:00:02 UTC
+Date/Publication: 2020-07-25 21:30:08 UTC
