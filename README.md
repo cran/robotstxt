@@ -5,12 +5,12 @@
 
 **Status**
 
-*lines of R code:* 999, *lines of test code:* 1632
+*lines of R code:* 1007, *lines of test code:* 1758
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![](https://badges.ropensci.org/25_status.svg)](https://github.com/ropensci/onboarding/issues/25)
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
+[![](https://badges.ropensci.org/25_status.svg)](https://github.com/ropensci/software-review/issues/25)
 <a href="https://travis-ci.org/ropensci/robotstxt"><img src="https://api.travis-ci.org/ropensci/robotstxt.svg?branch=master"><a/>
 <a href="https://cran.r-project.org/package=robotstxt"><img src="http://www.r-pkg.org/badges/version/robotstxt"></a>
 [![cran
@@ -21,7 +21,7 @@ checks](https://cranchecks.info/badges/summary/reshape)](https://cran.r-project.
 
 **Development version**
 
-0.7.7 - 2020-07-22 / 11:19:28
+0.7.13 - 2020-08-19 / 20:39:24
 
 **Description**
 
@@ -81,8 +81,8 @@ terms:
 > project maintainers.
 > 
 > This Code of Conduct is adapted from the Contributor Covenant
-> (<http://contributor-covenant.org>), version 1.0.0, available at
-> <http://contributor-covenant.org/version/1/0/0/>
+> (<https://www.contributor-covenant.org/>), version 1.0.0, available at
+> <https://www.contributor-covenant.org/version/1/0/0/code-of-conduct/>
 
 ## Installation
 
@@ -514,7 +514,7 @@ The last HTTP request is stored in an object
 ``` r
 rt_last_http$request
 ## Response [https://petermeissner.de/robots.txt]
-##   Date: 2020-07-24 08:26
+##   Date: 2020-09-03 19:05
 ##   Status: 200
 ##   Content-Type: text/plain
 ##   Size: 20 B
@@ -556,7 +556,7 @@ was going on in the client-server exchange.
 ``` r
 attr(rt, "request")
 ## Response [https://petermeissner.de/robots.txt]
-##   Date: 2020-07-24 08:26
+##   Date: 2020-09-03 19:05
 ##   Status: 200
 ##   Content-Type: text/plain
 ##   Size: 20 B
@@ -593,7 +593,7 @@ rt_req$request
 ## * httpget: TRUE
 ## Headers:
 ## * Accept: application/json, text/xml, application/xml, */*
-## * user-agent: R version 3.6.1 (2019-07-05)
+## * user-agent: R version 3.6.3 (2020-02-29)
 
 # response headers
 rt_req$all_headers
@@ -609,7 +609,7 @@ rt_req$all_headers
 ## [1] "nginx/1.10.3 (Ubuntu)"
 ## 
 ## $date
-## [1] "Fri, 24 Jul 2020 08:26:00 GMT"
+## [1] "Thu, 03 Sep 2020 19:05:45 GMT"
 ## 
 ## $`content-type`
 ## [1] "text/html"
@@ -639,7 +639,7 @@ rt_req$all_headers
 ## [1] "nginx/1.10.3 (Ubuntu)"
 ## 
 ## $date
-## [1] "Fri, 24 Jul 2020 08:26:00 GMT"
+## [1] "Thu, 03 Sep 2020 19:05:45 GMT"
 ## 
 ## $`content-type`
 ## [1] "text/plain"
@@ -648,13 +648,13 @@ rt_req$all_headers
 ## [1] "20"
 ## 
 ## $`last-modified`
-## [1] "Wed, 09 Oct 2019 19:07:02 GMT"
+## [1] "Thu, 03 Sep 2020 15:33:01 GMT"
 ## 
 ## $connection
 ## [1] "keep-alive"
 ## 
 ## $etag
-## [1] "\"5d9e2fd6-14\""
+## [1] "\"5f510cad-14\""
 ## 
 ## $`accept-ranges`
 ## [1] "bytes"
@@ -698,7 +698,7 @@ as.list(rt)
 ## 
 ## $request
 ## Response [https://petermeissner.de/robots.txt]
-##   Date: 2020-07-24 08:26
+##   Date: 2020-09-03 19:05
 ##   Status: 200
 ##   Content-Type: text/plain
 ##   Size: 20 B
@@ -710,8 +710,7 @@ as.list(rt)
 The retrieval of robots.txt files is cached on a per R-session basis.
 Restarting an R-session will invalidate the cache. Also using the the
 function parameter `froce = TRUE` will force the package to re-retrieve
-the robots.txt
-file.
+the robots.txt file.
 
 ``` r
 paths_allowed("petermeissner.de/I_want_to_scrape_this_now", force = TRUE, verbose = TRUE)
@@ -724,6 +723,7 @@ paths_allowed("petermeissner.de/I_want_to_scrape_this_now",verbose = TRUE)
 
 ## More information
 
+  - <https://www.robotstxt.org/norobots-rfc.txt>
   - [Have a look at the vignette at
     https://cran.r-project.org/package=robotstxt/vignettes/using\_robotstxt.html](https://cran.r-project.org/package=robotstxt/vignettes/using_robotstxt.html)
   - [Google on

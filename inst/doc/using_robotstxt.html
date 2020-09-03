@@ -12,7 +12,7 @@
 
 <meta name="author" content="Peter Meissner" />
 
-<meta name="date" content="2020-07-25" />
+<meta name="date" content="2020-09-03" />
 
 <title>Using Robotstxt</title>
 
@@ -353,7 +353,7 @@ code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a617
 
 <h1 class="title toc-ignore">Using Robotstxt</h1>
 <h4 class="author">Peter Meissner</h4>
-<h4 class="date">2020-07-25</h4>
+<h4 class="date">2020-09-03</h4>
 
 
 <div id="TOC">
@@ -374,7 +374,7 @@ code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a617
 </div>
 <div id="robots.txt-files" class="section level1">
 <h1>Robots.txt files</h1>
-<p>Robots.txt files are a way to kindly ask webbots, spiders, crawlers, wanderers and the like to access or not access certain parts of a webpage. The de facto ‘standard’ never made it beyond a informal <a href="http://www.robotstxt.org/norobots-rfc.txt">“Network Working Group INTERNET DRAFT”</a>. Nonetheless, the use of robots.txt files is widespread (e.g. <a href="https://wikipedia.org/robots.txt" class="uri">https://wikipedia.org/robots.txt</a>, <a href="https://google.com/robots.txt" class="uri">https://google.com/robots.txt</a>) and bots from Google, Yahoo and the like will adhere to the rules defined in robots.txt files - although, their interpretation of those rules might differ (e.g. <a href="https://developers.google.com/search/reference/robots_txt">rules for googlebot</a>).</p>
+<p>Robots.txt files are a way to kindly ask webbots, spiders, crawlers, wanderers and the like to access or not access certain parts of a webpage. The de facto ‘standard’ never made it beyond a informal <a href="http://www.robotstxt.org/norobots-rfc.txt">“Network Working Group INTERNET DRAFT”</a>. Nonetheless, the use of robots.txt files is widespread (e.g. <a href="https://en.wikipedia.org/robots.txt" class="uri">https://en.wikipedia.org/robots.txt</a>, <a href="https://www.google.com/robots.txt" class="uri">https://www.google.com/robots.txt</a>) and bots from Google, Yahoo and the like will adhere to the rules defined in robots.txt files - although, their interpretation of those rules might differ (e.g. <a href="https://developers.google.com/search/reference/robots_txt">rules for googlebot</a>).</p>
 <p>As the name of the files already suggests robots.txt files are plain text and always found at the root of a domain. The syntax of the files in essence follows a <code>fieldname: value</code> scheme with optional preceding <code>user-agent: ...</code> lines to indicate the scope of the following rule block. Blocks are separated by blank lines and the omission of a user-agent field (which directly corresponds to the HTTP user-agent field) is seen as referring to all bots. <code>#</code> serves to comment lines and parts of lines. Everything after <code>#</code> until the end of line is regarded a comment. Possible field names are: user-agent, disallow, allow, crawl-delay, sitemap, and host.</p>
 <p>Let us have an example file to get an idea how a robots.txt file might look like. The file below starts with a comment line followed by a line disallowing access to any content – everything that is contained in root (“<code>/</code>”) – for all bots. The next block concerns GoodBot and NiceBot. Those two get the previous permissions lifted by being disallowed nothing. The third block is for PrettyBot. PrettyBot likes shiny stuff and therefor gets a special permission for everything contained in the “<code>/shinystuff/</code>” folder while all other restrictions still hold. In the last block all bots are asked to pause at least 5 seconds between two visits.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode robots.txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1"></a># this is a comment </span>
@@ -472,8 +472,8 @@ code > span.fu { color: #900; font-weight: bold; } code > span.er { color: #a617
 ##     spiderbar::can_fetch(obj = self$robexclobj, path = paths, 
 ##         user_agent = bot)
 ## }
-## &lt;bytecode: 0x0000000018d35510&gt;
-## &lt;environment: 0x0000000018d34908&gt;
+## &lt;bytecode: 0x000000001bac20f0&gt;
+## &lt;environment: 0x000000001bac1478&gt;
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;robotstxt&quot;</code></pre>
