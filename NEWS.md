@@ -1,6 +1,18 @@
 NEWS robotstxt
 ==========================================================================
 
+0.7.15 | 2024-08-24
+--------------------------------------------------------------------------
+
+- CRAN compliance - Packages which use Internet resources should fail gracefully
+- CRAN compliance - fix R CMD check NOTES.
+
+
+0.7.14 | 2024-08-24
+--------------------------------------------------------------------------
+
+- CRAN compliance - Packages which use Internet resources should fail gracefully
+
 
 0.7.13 | 2020-09-03
 --------------------------------------------------------------------------
